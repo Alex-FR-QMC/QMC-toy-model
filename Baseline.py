@@ -48,7 +48,7 @@ class SimulationConfig:
     str_drift_max: float = 0.015
     str_delta_min: float = 0.001
     str_delta_max: float = 0.10
-    rsr_delta_min: float = 0.30
+    rsr_delta_min: float = 0.50
 
     # Shock perturbation
     shock_time: Optional[int] = None
@@ -170,7 +170,8 @@ def detect_regime(
     tau_history: np.ndarray,
     dtau: np.ndarray,
     cfg: SimulationConfig,
-    window: int = 20
+    window: int = 20,
+    rsr_min_duration: int = 15
 ) -> int:
     if t < window + 1:
         return 0
@@ -183,7 +184,16 @@ def detect_regime(
         return 1  # STR
 
     if recent_delta > cfg.rsr_delta_min:
-        return 2  # RSR
+        # Verify RSR persists over rsr_min_duration steps
+        if t >= window + rsr_min_duration:
+            sustained = all(
+                float(np.std(tau_history[s - window:s])) > cfg.rsr_delta_min
+                for s in range(t - rsr_min_duration + 1, t + 1)
+                if s >= window + 1
+            )
+            if sustained:
+                return 2  # RSR
+        return 0
 
     return 0
 
