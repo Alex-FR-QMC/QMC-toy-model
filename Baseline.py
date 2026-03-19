@@ -45,10 +45,10 @@ class SimulationConfig:
     g_floor: float = 0.01
 
     # Regime detection thresholds (calibrated empirically)
-    str_drift_max: float = 0.002
+    str_drift_max: float = 0.015
     str_delta_min: float = 0.001
-    str_delta_max: float = 0.05
-    rsr_delta_min: float = 0.05
+    str_delta_max: float = 0.10
+    rsr_delta_min: float = 0.10
 
     # Shock perturbation
     shock_time: Optional[int] = None
