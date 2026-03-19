@@ -48,7 +48,7 @@ class SimulationConfig:
     str_drift_max: float = 0.015
     str_delta_min: float = 0.001
     str_delta_max: float = 0.10
-    rsr_delta_min: float = 0.10
+    rsr_delta_min: float = 0.30
 
     # Shock perturbation
     shock_time: Optional[int] = None
