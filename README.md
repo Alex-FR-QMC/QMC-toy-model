@@ -33,7 +33,7 @@ The model demonstrates three results:
 |---|---|---|
 | `Baseline.py` | Unregulated model + perturbation experiments | 2, 3 |
 | `sensitivity_analysis.py` | Parametric sweep | 4 |
-| `mcq_regulated.py` | QMC-regulated dynamics | 5 |
+| `qmc_regulated.py` | QMC-regulated dynamics | 5 |
 | `fep_comparison.py` | FEP-like comparison | 6 |
 | `calibrate_regime_thresholds.py` | STR/RSR threshold justification | Appendix |
 | `calibrate_nominal_parameters.py` | Nominal parameter justification | Appendix |
