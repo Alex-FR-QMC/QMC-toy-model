@@ -1,7 +1,7 @@
 """
-mcq_regulated.py
+qmc_regulated.py
 ================
-Section 5 — MCQ-Inspired Minimal Regulated Dynamics
+Section 5 — QMC-Inspired Minimal Regulated Dynamics
 
 Introduces four operative mechanisms into the baseline tensional field,
 each approximating a construct from Chapter 1 of the QMC paradigm:
@@ -13,13 +13,13 @@ each approximating a construct from Chapter 1 of the QMC paradigm:
 
 These mechanisms are intentionally minimal. They do not implement the full
 architecture of Chapter 2. Their purpose is to demonstrate that a small
-set of MCQ-inspired constraints is sufficient to restore and maintain
+set of QMC-inspired constraints is sufficient to restore and maintain
 viability where the unregulated baseline fails.
 
 Requires: Baseline.py in the same directory.
 
 Usage:
-    python mcq_regulated.py
+    python qmc_regulated.py
 
 Outputs:
     figures/comparison.png   -- baseline vs regulated superposed
@@ -45,7 +45,7 @@ from Baseline import (
 
 
 # ============================================================
-# MCQ-inspired regulated dynamics config
+# QMC-inspired regulated dynamics config
 # ============================================================
 
 @dataclass
@@ -115,7 +115,7 @@ def run_regulated(rcfg: RegulatedConfig) -> Dict[str, Any]:
         coupling  = cfg.coupling_strength * (A @ tau - degree * tau)
         reflexive = -cfg.reflexive_strength * (tau - np.mean(tau))
 
-        # --- MCQ mechanism 1 : anti-synchronisation ---
+        # --- QMC mechanism 1 : anti-synchronisation ---
         anti_sync = np.zeros(cfg.N)
         for i in range(cfg.N):
             for j in range(cfg.N):
@@ -128,7 +128,7 @@ def run_regulated(rcfg: RegulatedConfig) -> Dict[str, Any]:
                             rcfg.anti_sync_threshold - abs(diff)
                         )
 
-        # --- MCQ mechanism 2 : threshold detection + directed perturbation ---
+        # --- QMC mechanism 2 : threshold detection + directed perturbation ---
         directed = np.zeros(cfg.N)
         if delta < rcfg.delta_alert:
             # Identify most homogeneous nodes (smallest local contrast)
@@ -144,7 +144,7 @@ def run_regulated(rcfg: RegulatedConfig) -> Dict[str, Any]:
                 direction = 1.0 if tau[idx] < np.mean(tau) else -1.0
                 directed[idx] = rcfg.directed_strength * direction * rng.uniform(0.5, 1.5)
 
-        # --- MCQ mechanism 3 : short local memory ---
+        # --- QMC mechanism 3 : short local memory ---
         mem_buffer = np.roll(mem_buffer, 1, axis=0)
         mem_buffer[0] = tau.copy()
         local_mean_history = np.mean(mem_buffer, axis=0)
@@ -194,7 +194,7 @@ def plot_comparison(
     ts   = np.arange(T)
 
     fig = plt.figure(figsize=(14, 13))
-    fig.suptitle("QMC Toy Model — Baseline vs MCQ-Regulated", fontsize=15, y=0.98)
+    fig.suptitle("QMC Toy Model — Baseline vs QMC-Regulated", fontsize=15, y=0.98)
     gs  = gridspec.GridSpec(3, 2, figure=fig, hspace=0.42, wspace=0.32)
 
     ax_field  = fig.add_subplot(gs[0, 0])
@@ -299,10 +299,10 @@ if __name__ == "__main__":
     os.makedirs("figures", exist_ok=True)
 
     # --------------------------------------------------------
-    # Section 5 — MCQ-inspired regulated dynamics
+    # Section 5 — QMC-inspired regulated dynamics
     # Calibrated parameters — reproduce figures/comparison.png
     #
-    # MCQ mechanism mapping:
+    # QMC mechanism mapping:
     #   anti_sync       → approx. MI  (maintains integrable gap)
     #   delta_alert     → approx. RR3 (drift detection toward dV)
     #   directed        → approx. MV  (morphodynamic reconfiguration)
