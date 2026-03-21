@@ -84,9 +84,6 @@ Quemeneur, A. (2026). *A Morphodynamic Theory of Cognitive Viability:
 Foundations of the Quantum Meta-Cognition Paradigm* (Chapter 1).
 arXiv preprint. [arXiv link]
 
-Quemeneur, A. (2026). *A Minimal Dynamical Illustration of Viability
-in the QMC Framework*. [arXiv link — to be added upon submission]
-
 ---
 
 ## License
