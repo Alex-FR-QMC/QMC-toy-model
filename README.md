@@ -1,29 +1,45 @@
-# QMC Toy Model — Computational Grounding of the QMC Framework
+# Viability Collapse in Distributed Tensional Fields — Computational Study
 
-Minimal dynamical model illustrating viability collapse and operational
-necessity in the Quantum Meta-Cognition (QMC) paradigm.
+Minimal dynamical model demonstrating that the structural conditions for
+non-trivial transformation in a distributed field are not self-maintaining,
+and that a minimal regulatory architecture is sufficient to restore them.
+
+Associated paper: *Viability Collapse in Distributed Tensional Fields: A
+Computational Study* (submitted to AI, MDPI).
 
 ---
 
 ## Description
 
-This repository implements a discrete tensional field τᵢ(t) defined on a
-Watts-Strogatz graph (N=12 nodes) and tracks two morphodynamic observables
-derived from Chapter 1 of the QMC paradigm:
+This repository implements a discrete scalar field τᵢ(t) defined on a
+Watts-Strogatz graph (N=12 nodes) and tracks two observable conditions
+for viable distributed dynamics:
 
-- **Δ(t)** — global field dispersion (morphodynamic corridor)
-- **𝒢(t)** — mean local contrast over edges (transformable gradient)
+- **Δ(t)** — global field dispersion, measuring the integrability corridor
+- **𝒢(t)** — mean local contrast over graph edges, measuring local
+  transformability
+
+A system is *viable* when both conditions are simultaneously satisfied:
+
+```
+0 < Δ(t) < Δ_crit    and    𝒢(t) > 𝒢_min
+```
 
 The model demonstrates three results:
 
-1. An unregulated distributed tensional field collapses structurally toward
-   a homogeneous attractor, exiting the viability domain 𝒱 — regardless of
-   parametric configuration or external perturbation.
-2. This collapse is faster under FEP-like (gradient descent) dynamics than
-   under the QMC unregulated baseline.
-3. A minimal set of QMC-inspired mechanisms (anti-synchronisation, drift
-   detection, directed perturbation, short local memory) is sufficient to
-   maintain viability across the full simulation and across all tested seeds.
+1. An unregulated distributed field collapses structurally toward a
+   homogeneous attractor — permanently exiting the viability domain —
+   regardless of parametric configuration or external perturbation.
+2. FEP-like (gradient descent) dynamics collapse faster than the
+   unregulated baseline, for the same structural reason.
+3. A minimal set of four regulatory mechanisms (anti-synchronisation,
+   drift detection, directed perturbation, short local memory) is
+   sufficient to maintain viability across the full simulation and
+   across all tested seeds (fraction_viable = 1.000, 20 seeds, T=300
+   and T=1000).
+
+The theoretical grounding of the viability conditions is provided in [5]
+(see paper references).
 
 ---
 
@@ -33,7 +49,7 @@ The model demonstrates three results:
 |---|---|---|
 | `Baseline.py` | Unregulated model + perturbation experiments | 2, 3 |
 | `sensitivity_analysis.py` | Parametric sweep | 4 |
-| `qmc_regulated.py` | QMC-regulated dynamics | 5 |
+| `qmc_regulated.py` | Regulated dynamics + comparison figure | 5 |
 | `fep_comparison.py` | FEP-like comparison | 6 |
 | `calibrate_regime_thresholds.py` | STR/RSR threshold justification | Appendix |
 | `calibrate_nominal_parameters.py` | Nominal parameter justification | Appendix |
@@ -61,6 +77,16 @@ All simulations are fully deterministic given their explicit random seed.
 
 ---
 
+## Key results at a glance
+
+| System | fraction_viable | t_exit_V | final_delta | final_g |
+|---|---|---|---|---|
+| FEP-like | 0.023 | 7 | 0.002 | 0.003 |
+| Unregulated baseline | 0.030 | 9 | 0.003 | 0.004 |
+| Regulated | **1.000** | **None** | **0.039** | **0.055** |
+
+---
+
 ## Dependencies
 
 ```
@@ -75,14 +101,6 @@ Install with:
 ```bash
 pip install numpy networkx matplotlib
 ```
-
----
-
-## Related publications
-
-Quemeneur, A. (2026). *A Morphodynamic Theory of Cognitive Viability:
-Foundations of the Quantum Meta-Cognition Paradigm* (Chapter 1).
-arXiv preprint. [arXiv link]
 
 ---
 
