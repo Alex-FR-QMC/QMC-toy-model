@@ -38,7 +38,7 @@ The model demonstrates three results:
    across all tested seeds (fraction_viable = 1.000, 20 seeds, T=300
    and T=1000).
 
-The theoretical grounding of the viability conditions is provided in [5]
+The theoretical grounding of the viability conditions is provided in [4]
 (see paper references).
 
 ---
